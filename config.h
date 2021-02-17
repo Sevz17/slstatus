@@ -63,45 +63,61 @@ static const char unknown_str[] = "N/A";
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
+
 static const struct arg args[] = {
 	/* function		format		argument */
-	{ run_command,	"  %s",	"chkup" },
+	/* checkupdates; you must run this script
+			#/bin/sh
+			while true
+			do
+			  sleep 60
+			  if [[ ! -f /var/lib/pacman/db.lck ]]; then
+			    echo "`checkupdates | wc -l `/`yay -Qu | wc -l`\" > ~/.config/.updates
+			  fi
+			done
+	*/
+	{ run_command,	"  %s",	"cat ~/.config/.updates" },
 	{ separator,	"  ",		NULL },
 
+	// Indicates the volume
 	{ run_command,	"%s",		"volume" },
 	{ separator,	"  ",		NULL },
 
+	// The hour
 	{ datetime,		" %s",		"%T" },
 	{ separator,	"  ",		NULL },
 
+	// The day
 	{ datetime,		" %s",		"%d/%m/%Y" },
 	{ separator,	"  ",		NULL },
 
-	{ run_command,	"  %s",	"xkbmap --say" },
+	// keymap
+	{ keymap,		"  %s",	NULL },
 
 
+	// separator between bars
 	{ separator,	"; ",		NULL },
 
 
-	{ run_command,	"  %s",	"getsong --artist" },
-	{ separator,	" - ",		NULL },
-
-	{ run_command,	"%s",		"getsong --title" },
-	{ separator,	" - ",		NULL },
-
-	{ run_command,	"%s",		"getsong --album" },
+	// info for the current song
+	{ run_command,	"%s",		"getsong" },
 	{ separator,	"   ",		NULL },
 
-	{ run_command,	"Mem: %s",	"stats --memory" },
+	// ram usage and total
+	{ ram_used,		"Mem: %s/",	NULL },
+	{ ram_total,	"%s",		NULL },
 	{ separator,	"   ",		NULL },
 
+	// load average
 	{ load_avg,		"Avg: %s",	NULL },
 	{ separator,	"   ",		NULL },
 
+	// cpu usage in percentage
 	{ cpu_perc,		"CPU: %s",	NULL },
 	{ run_command,	"%s",		"echo '%'" },
 	{ separator,	"   ",		NULL },
 
+	// netspeed
 	{ netspeed_rx,	"Net: %s↓",	"enp0s7" },
 	{ netspeed_tx,	"↑ %s",		"enp0s7" },
 	{ separator,	"  ",		NULL },
