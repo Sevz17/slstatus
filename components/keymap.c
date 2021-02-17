@@ -83,5 +83,14 @@ end:
 		warn("XCloseDisplay: Failed to close display");
 	}
 
+	if (!strcmp(layout, "us"))
+		return "US";
+	else if (!strcmp(layout, "us(dvorak)"))
+		return "US[dk]";
+	else if (!strcmp(layout, "latam"))
+		return "ES";
+	else if (!strcmp(layout, "latam(dvorak)"))
+		return "ES[dk]";
+
 	return layout;
 }
