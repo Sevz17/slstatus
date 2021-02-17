@@ -2,4 +2,6 @@
 *.orig
 *.rej
 *.o
+src
+pkg
 slstatus
