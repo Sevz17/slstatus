@@ -4,7 +4,7 @@
 const unsigned int interval = 1000;
 
 /* text to show if no value can be retrieved */
-static const char unknown_str[] = "N/A";
+static const char unknown_str[] = "";
 
 /* maximum output string length */
 #define MAXLEN 2048
@@ -76,20 +76,16 @@ static const struct arg args[] = {
 			  fi
 			done
 	*/
-	{ run_command,	"  %s",	"cat ~/.config/.updates" },
-	{ separator,	"  ",		NULL },
+	{ run_command,	"  %s  ",	"cat ~/.config/.updates" },
 
 	// Indicates the volume
-	{ run_command,	"%s",		"volume" },
-	{ separator,	"  ",		NULL },
+	{ run_command,	"%s  ",		"volume" },
 
 	// The hour
-	{ datetime,		" %s",		"%T" },
-	{ separator,	"  ",		NULL },
+	{ datetime,		" %s  ",	"%T" },
 
 	// The day
-	{ datetime,		" %s",		"%d/%m/%Y" },
-	{ separator,	"  ",		NULL },
+	{ datetime,		" %s  ",	"%d/%m/%Y" },
 
 	// keymap
 	{ keymap,		"  %s",	NULL },
@@ -101,24 +97,27 @@ static const struct arg args[] = {
 
 	// info for the current song
 	{ run_command,	"%s",		"getsong" },
-	{ separator,	"   ",		NULL },
 
 	// ram usage and total
-	{ ram_used,		"Mem: %s/",	NULL },
-	{ ram_total,	"%s",		NULL },
-	{ separator,	"   ",		NULL },
+	{ ram_stats,	"Mem: %s   ",	NULL },
 
 	// load average
-	{ load_avg,		"Avg: %s",	NULL },
-	{ separator,	"   ",		NULL },
+	{ load_avg,		"Avg: %s   ",NULL },
+
+	// temperature
+	{ temp,	"Temp: %s°C  ",	"/sys/class/hwmon/hwmon0/temp1_input" },
 
 	// cpu usage in percentage
-	{ cpu_perc,		"CPU: %s",	NULL },
-	{ run_command,	"%s",		"echo '%'" },
-	{ separator,	"   ",		NULL },
+	{ cpu_perc,		"CPU: %s%%   ",NULL },
 
 	// netspeed
-	{ netspeed_rx,	"Net: %s↓",	"enp0s7" },
-	{ netspeed_tx,	"↑ %s",		"enp0s7" },
-	{ separator,	"  ",		NULL },
+	{ netspeed_rx,	"Net: %s↓",	"enp6s0" },
+	{ netspeed_tx,	"↑ %s   ",	"enp6s0" },
+
+	// Disk usage
+	{ disk_stats,	"%s",		"/" },
+	{ disk_stats,	"%s",		"/var" },
+	{ disk_stats,	"%s",		"/home" },
+	{ disk_stats,	"%s",		"/datos" },
+	{ disk_stats,	"%s",		"/windows" },
 };
