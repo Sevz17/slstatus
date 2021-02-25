@@ -17,6 +17,7 @@ const char *disk_free(const char *path);
 const char *disk_perc(const char *path);
 const char *disk_total(const char *path);
 const char *disk_used(const char *path);
+const char *disk_stats(const char *path);
 
 /* entropy */
 const char *entropy(void);
