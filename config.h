@@ -85,7 +85,7 @@ static const struct arg args[] = {
 	{ datetime,		" %s  ",	"%T" },
 
 	// The day
-	{ datetime,		" %s  ",	"%d/%m/%Y" },
+	{ datetime,		" %s  ",	"%a %d/%m/%Y" },
 
 	// keymap
 	{ keymap,		"  %s",	NULL },
@@ -99,7 +99,8 @@ static const struct arg args[] = {
 	{ run_command,	"%s",		"getsong" },
 
 	// ram usage and total
-	{ ram_stats,	"Mem: %s   ",	NULL },
+	{ ram_used,	"Mem: %s/",	NULL },
+	{ ram_total,	"%s   ",	NULL },
 
 	// load average
 	{ load_avg,		"Avg: %s   ",NULL },
@@ -118,6 +119,6 @@ static const struct arg args[] = {
 	{ disk_stats,	"%s",		"/" },
 	{ disk_stats,	"%s",		"/var" },
 	{ disk_stats,	"%s",		"/home" },
-	{ disk_stats,	"%s",		"/datos" },
+	{ disk_stats,	"%s",		"/data" },
 	{ disk_stats,	"%s",		"/windows" },
 };
